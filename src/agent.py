@@ -22,6 +22,7 @@ from .nodes import (
 from .state import State
 from .tools import tavily_search
 from .tracing import Tracer, generate_trace_html
+from .memory import MemoryStore
 from .utils import Config, load_config, format_search_results_for_prompt
 from .prompts.prompts import SYSTEM_PROMPT_RESEARCH_PLAN, SYSTEM_PROMPT_GLOBAL_REVIEW
 
@@ -43,6 +44,8 @@ class DeepSearchAgent:
         os.makedirs(self.config.output_dir, exist_ok=True)
         self.tracer = Tracer(enabled=self.config.enable_tracing)
         self.tracing_output_dir = os.path.join(self.config.output_dir, self.config.tracing_subdir)
+        self.memory = MemoryStore(os.path.join(self.config.output_dir, "memory"))
+        self.current_search_cache: List[Dict[str, Any]] = []
 
         print(f"Deep Search Agent 已初始化（Plan-and-Review 版本）")
         print(f"使用LLM: {self.llm_client.get_model_info()}")
@@ -96,6 +99,7 @@ class DeepSearchAgent:
         print(f"\n{'='*60}")
         print(f"开始深度研究（Plan-and-Review）: {query}")
         print(f"{'='*60}")
+        self.current_search_cache = []
 
         try:
             self.tracer.set_metadata(
@@ -106,7 +110,20 @@ class DeepSearchAgent:
             self.tracer.log_event("info", "research.start", {"query_length": len(query)})
 
             with self.tracer.span("step0.make_research_plan"):
-                plan = self._make_research_plan(query)
+                memory_record = self.memory.find_similar_query(query, threshold=0.85)
+                if memory_record and memory_record.get("plan"):
+                    plan = memory_record["plan"]
+                    self.tracer.log_event(
+                        "info",
+                        "memory.plan_hit",
+                        {
+                            "query": query,
+                            "matched_query": memory_record.get("query", ""),
+                            "dimensions_count": len(plan.get("dimensions", []))
+                        }
+                    )
+                else:
+                    plan = self._make_research_plan(query)
 
             with self.tracer.span("step1.generate_report_structure"):
                 self._generate_report_structure(query, plan)
@@ -128,6 +145,25 @@ class DeepSearchAgent:
             if save_report:
                 with self.tracer.span("step5.save_report"):
                     self._save_report(final_report)
+
+            self.memory.upsert_record(
+                query=query,
+                plan=plan,
+                search_cache=self.current_search_cache,
+                final_report_summary={
+                    "summary": final_report[:500],
+                    "final_length": len(final_report)
+                }
+            )
+            self.tracer.log_event(
+                "info",
+                "memory.upsert",
+                {
+                    "query": query,
+                    "search_cache_count": len(self.current_search_cache),
+                    "summary_length": min(500, len(final_report))
+                }
+            )
 
             print(f"\n{'='*60}")
             print("深度研究完成！")
@@ -319,15 +355,44 @@ class DeepSearchAgent:
             "step2.initial_search",
             {"section": section_title, "query": search_query}
         )
-        search_results = tavily_search(
-            search_query,
-            max_results=self.config.max_search_results,
-            timeout=self.config.search_timeout,
-            api_key=self.config.tavily_api_key
-        )
+        cached_results = self.memory.find_search_cache(search_query, threshold=0.92)
+        from_memory_cache = cached_results is not None
+
+        if from_memory_cache:
+            search_results = cached_results
+            self.tracer.log_event(
+                "info",
+                "memory.search_hit",
+                {
+                    "section": section_title,
+                    "query": search_query,
+                    "result_count": len(search_results)
+                }
+            )
+        else:
+            search_results = tavily_search(
+                search_query,
+                max_results=self.config.max_search_results,
+                timeout=self.config.search_timeout,
+                api_key=self.config.tavily_api_key
+            )
+            self.tracer.log_event(
+                "info",
+                "memory.search_miss",
+                {
+                    "section": section_title,
+                    "query": search_query,
+                    "result_count": len(search_results or [])
+                }
+            )
 
         # 如果有额外 hint，追加搜索（最多再搜 1 次）
-        if search_hints and len(search_hints) > 1 and search_results is not None:
+        if (
+            not from_memory_cache
+            and search_hints
+            and len(search_hints) > 1
+            and search_results is not None
+        ):
             extra_query = search_hints[1]
             print(f"  - [补充搜索] {extra_query}")
             self.tracer.log_event(
@@ -343,6 +408,11 @@ class DeepSearchAgent:
             )
             if extra_results:
                 search_results = (search_results or []) + extra_results
+
+        self.current_search_cache.append({
+            "search_query": search_query,
+            "results": search_results or []
+        })
 
         if search_results:
             print(f"  - 找到 {len(search_results)} 个搜索结果")
