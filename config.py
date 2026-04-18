@@ -2,13 +2,13 @@
 # 请在这里填入您的API密钥
 
 # DeepSeek API Key
-DEEPSEEK_API_KEY = "your_deepseek_api_key_here"
+DEEPSEEK_API_KEY = "sk-88f13750cdce483ba1c2d7444781dba1"
 
 # OpenAI API Key (可选)
 OPENAI_API_KEY = "your_openai_api_key_here"
 
 # Tavily搜索API Key
-TAVILY_API_KEY = "your_tavily_api_key_here"
+TAVILY_API_KEY = "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"
 
 # 配置参数
 DEFAULT_LLM_PROVIDER = "deepseek"

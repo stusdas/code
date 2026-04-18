@@ -30,7 +30,7 @@ def basic_example():
         agent = DeepSearchAgent(config)
         
         # 执行研究
-        query = "2025年人工智能发展趋势"
+        query = "2026NER发展趋势"
         print(f"开始研究: {query}")
         
         final_report = agent.research(query, save_report=True)
