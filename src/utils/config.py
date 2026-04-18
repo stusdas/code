@@ -33,6 +33,8 @@ class Config:
     # 输出配置
     output_dir: str = "reports"
     save_intermediate_states: bool = True
+    enable_tracing: bool = True
+    tracing_subdir: str = "traces"
     
     def validate(self) -> bool:
         """验证配置"""
@@ -76,7 +78,9 @@ class Config:
                 max_reflections=getattr(config_module, "MAX_REFLECTIONS", 2),
                 max_paragraphs=getattr(config_module, "MAX_PARAGRAPHS", 5),
                 output_dir=getattr(config_module, "OUTPUT_DIR", "reports"),
-                save_intermediate_states=getattr(config_module, "SAVE_INTERMEDIATE_STATES", True)
+                save_intermediate_states=getattr(config_module, "SAVE_INTERMEDIATE_STATES", True),
+                enable_tracing=getattr(config_module, "ENABLE_TRACING", True),
+                tracing_subdir=getattr(config_module, "TRACING_SUBDIR", "traces")
             )
         else:
             # .env格式配置文件
@@ -103,7 +107,9 @@ class Config:
                 max_reflections=int(config_dict.get("MAX_REFLECTIONS", "2")),
                 max_paragraphs=int(config_dict.get("MAX_PARAGRAPHS", "5")),
                 output_dir=config_dict.get("OUTPUT_DIR", "reports"),
-                save_intermediate_states=config_dict.get("SAVE_INTERMEDIATE_STATES", "true").lower() == "true"
+                save_intermediate_states=config_dict.get("SAVE_INTERMEDIATE_STATES", "true").lower() == "true",
+                enable_tracing=config_dict.get("ENABLE_TRACING", "true").lower() == "true",
+                tracing_subdir=config_dict.get("TRACING_SUBDIR", "traces")
             )
 
 
@@ -155,6 +161,8 @@ def print_config(config: Config):
     print(f"最大段落数: {config.max_paragraphs}")
     print(f"输出目录: {config.output_dir}")
     print(f"保存中间状态: {config.save_intermediate_states}")
+    print(f"启用Tracing: {config.enable_tracing}")
+    print(f"Tracing子目录: {config.tracing_subdir}")
     
     # 显示API密钥状态（不显示实际密钥）
     print(f"DeepSeek API Key: {'已设置' if config.deepseek_api_key else '未设置'}")

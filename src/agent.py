@@ -21,6 +21,7 @@ from .nodes import (
 )
 from .state import State
 from .tools import tavily_search
+from .tracing import Tracer, generate_trace_html
 from .utils import Config, load_config, format_search_results_for_prompt
 from .prompts.prompts import SYSTEM_PROMPT_RESEARCH_PLAN, SYSTEM_PROMPT_GLOBAL_REVIEW
 
@@ -40,6 +41,8 @@ class DeepSearchAgent:
         self._initialize_nodes()
         self.state = State()
         os.makedirs(self.config.output_dir, exist_ok=True)
+        self.tracer = Tracer(enabled=self.config.enable_tracing)
+        self.tracing_output_dir = os.path.join(self.config.output_dir, self.config.tracing_subdir)
 
         print(f"Deep Search Agent 已初始化（Plan-and-Review 版本）")
         print(f"使用LLM: {self.llm_client.get_model_info()}")
@@ -95,34 +98,57 @@ class DeepSearchAgent:
         print(f"{'='*60}")
 
         try:
-            # Step 0: 生成研究施工图（plan）
-            plan = self._make_research_plan(query)
+            self.tracer.set_metadata(
+                query=query,
+                llm_provider=self.config.default_llm_provider,
+                llm_model=self.llm_client.get_model_info()
+            )
+            self.tracer.log_event("info", "research.start", {"query_length": len(query)})
 
-            # Step 1: 依据 plan 生成报告结构
-            self._generate_report_structure(query, plan)
+            with self.tracer.span("step0.make_research_plan"):
+                plan = self._make_research_plan(query)
 
-            # Step 2: 按 plan 处理每个段落
-            self._process_paragraphs(plan)
+            with self.tracer.span("step1.generate_report_structure"):
+                self._generate_report_structure(query, plan)
+                self.tracer.log_event(
+                    "info",
+                    "step1.generate_report_structure",
+                    {"paragraph_count": len(self.state.paragraphs)}
+                )
 
-            # Step 3: 生成初版最终报告
-            draft_report = self._generate_final_report()
+            with self.tracer.span("step2.process_paragraphs"):
+                self._process_paragraphs(plan)
 
-            # Step 4: 全文总审，输出最终版本
-            final_report = self._global_review(query, draft_report, plan)
+            with self.tracer.span("step3.generate_draft_report"):
+                draft_report = self._generate_final_report()
 
-            # Step 5: 保存报告
+            with self.tracer.span("step4.global_review"):
+                final_report = self._global_review(query, draft_report, plan)
+
             if save_report:
-                self._save_report(final_report)
+                with self.tracer.span("step5.save_report"):
+                    self._save_report(final_report)
 
             print(f"\n{'='*60}")
             print("深度研究完成！")
             print(f"{'='*60}")
+            self.tracer.log_event("info", "research.finish", {"status": "success"})
 
             return final_report
 
         except Exception as e:
+            self.tracer.log_event("error", "research.fail", {"error": str(e)})
             print(f"研究过程中发生错误: {str(e)}")
             raise e
+        finally:
+            trace_path = self.tracer.save(self.tracing_output_dir, filename_prefix="research_trace")
+            if trace_path:
+                print(f"Tracing 已保存到: {trace_path}")
+                try:
+                    html_path = generate_trace_html(trace_path)
+                    print(f"Tracing HTML 流程图已生成: {html_path}")
+                except Exception as exc:
+                    print(f"[警告] Tracing HTML 生成失败: {exc}")
 
     # =========================================================
     # Step 0：生成研究计划
@@ -151,6 +177,14 @@ class DeepSearchAgent:
             if json_match:
                 raw = json_match.group(0)
             plan = json.loads(raw)
+            self.tracer.log_event(
+                "info",
+                "step0.make_research_plan",
+                {
+                    "status": "success",
+                    "dimensions_count": len(plan.get("dimensions", []))
+                }
+            )
         except Exception as e:
             print(f"  [警告] 研究计划生成失败，使用默认计划: {e}")
             plan = {
@@ -160,6 +194,11 @@ class DeepSearchAgent:
                 "section_requirements": {},
                 "risk_points": ["请确保信息准确", "注意引用最新资料"]
             }
+            self.tracer.log_event(
+                "warn",
+                "step0.make_research_plan",
+                {"status": "fallback", "reason": str(e)}
+            )
 
         print(f"  研究目标: {plan.get('goal', query)}")
         dims = plan.get("dimensions", [])
@@ -198,6 +237,15 @@ class DeepSearchAgent:
 
         report_structure_node = ReportStructureNode(self.llm_client, enhanced_query)
         self.state = report_structure_node.mutate_state(state=self.state)
+        self.tracer.log_event(
+            "info",
+            "step1.generate_report_structure",
+            {
+                "query_preview": query[:80],
+                "used_dimensions": len(dims),
+                "paragraph_count": len(self.state.paragraphs)
+            }
+        )
 
         print(f"报告结构已生成，共 {len(self.state.paragraphs)} 个段落:")
         for i, paragraph in enumerate(self.state.paragraphs, 1):
@@ -219,9 +267,13 @@ class DeepSearchAgent:
         for i in range(total_paragraphs):
             print(f"\n[步骤 2.{i+1}] 处理段落: {self.state.paragraphs[i].title}")
             print("-" * 50)
-
-            self._initial_search_and_summary(i, plan)
-            self._reflection_loop(i, plan)
+            paragraph_title = self.state.paragraphs[i].title
+            with self.tracer.span(
+                "step2.process_single_paragraph",
+                {"paragraph_index": i, "title": paragraph_title}
+            ):
+                self._initial_search_and_summary(i, plan)
+                self._reflection_loop(i, plan)
 
             self.state.paragraphs[i].research.mark_completed()
 
@@ -262,6 +314,11 @@ class DeepSearchAgent:
 
         # 执行搜索
         print("  - 执行网络搜索...")
+        self.tracer.log_event(
+            "info",
+            "step2.initial_search",
+            {"section": section_title, "query": search_query}
+        )
         search_results = tavily_search(
             search_query,
             max_results=self.config.max_search_results,
@@ -273,6 +330,11 @@ class DeepSearchAgent:
         if search_hints and len(search_hints) > 1 and search_results is not None:
             extra_query = search_hints[1]
             print(f"  - [补充搜索] {extra_query}")
+            self.tracer.log_event(
+                "info",
+                "step2.initial_search.extra_query",
+                {"section": section_title, "query": extra_query}
+            )
             extra_results = tavily_search(
                 extra_query,
                 max_results=max(1, self.config.max_search_results // 2),
@@ -288,6 +350,11 @@ class DeepSearchAgent:
                 print(f"    {j}. {result['title'][:50]}...")
         else:
             print("  - 未找到搜索结果")
+        self.tracer.log_event(
+            "info",
+            "step2.initial_search.result",
+            {"section": section_title, "result_count": len(search_results or [])}
+        )
 
         # 更新搜索历史
         paragraph.research.add_search_results(search_query, search_results)
@@ -343,6 +410,15 @@ class DeepSearchAgent:
             reflection_output = self.reflection_node.run(reflection_input)
             search_query = reflection_output["search_query"]
             reasoning = reflection_output["reasoning"]
+            self.tracer.log_event(
+                "info",
+                "step2.reflection.search_query",
+                {
+                    "section": section_title,
+                    "iteration": reflection_i + 1,
+                    "query": search_query
+                }
+            )
 
             print(f"    反思查询: {search_query}")
             print(f"    反思推理: {reasoning}")
@@ -357,6 +433,15 @@ class DeepSearchAgent:
 
             if search_results:
                 print(f"    找到 {len(search_results)} 个反思搜索结果")
+            self.tracer.log_event(
+                "info",
+                "step2.reflection.search_result",
+                {
+                    "section": section_title,
+                    "iteration": reflection_i + 1,
+                    "result_count": len(search_results or [])
+                }
+            )
 
             paragraph.research.add_search_results(search_query, search_results)
 
@@ -440,9 +525,19 @@ class DeepSearchAgent:
             if not final:
                 print("  [警告] 全文总审返回空内容，保留初版报告")
                 final = draft
+                self.tracer.log_event(
+                    "warn",
+                    "step4.global_review",
+                    {"status": "fallback_empty_response"}
+                )
         except Exception as e:
             print(f"  [警告] 全文总审失败，保留初版报告: {e}")
             final = draft
+            self.tracer.log_event(
+                "warn",
+                "step4.global_review",
+                {"status": "fallback_exception", "reason": str(e)}
+            )
 
         # 更新状态中的最终报告
         self.state.final_report = final
