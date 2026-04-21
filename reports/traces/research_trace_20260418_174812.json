@@ -1,0 +1,310 @@
+{
+  "trace_id": "5d8c1f07-9458-4410-adfa-2a7a4c75ab93",
+  "started_at": "2026-04-18T17:40:44.956328",
+  "event_count": 33,
+  "metadata": {
+    "query": "2026NER发展趋势",
+    "llm_provider": "deepseek",
+    "llm_model": {
+      "provider": "DeepSeek",
+      "model": "deepseek-chat",
+      "api_base": "https://api.deepseek.com"
+    }
+  },
+  "events": [
+    {
+      "event": "info",
+      "stage": "research.start",
+      "timestamp": "2026-04-18T17:40:44.957164",
+      "duration_ms": null,
+      "data": {
+        "query_length": 11
+      }
+    },
+    {
+      "event": "start",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-18T17:40:44.957431",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "info",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-18T17:41:19.442030",
+      "duration_ms": null,
+      "data": {
+        "status": "success",
+        "dimensions_count": 4
+      }
+    },
+    {
+      "event": "end",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-18T17:41:19.451701",
+      "duration_ms": 34494,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-18T17:41:19.451912",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "info",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-18T17:41:35.146615",
+      "duration_ms": null,
+      "data": {
+        "query_preview": "2026NER发展趋势",
+        "used_dimensions": 4,
+        "paragraph_count": 2
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-18T17:41:35.146961",
+      "duration_ms": null,
+      "data": {
+        "paragraph_count": 2
+      }
+    },
+    {
+      "event": "end",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-18T17:41:35.146995",
+      "duration_ms": 15695,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step2.process_paragraphs",
+      "timestamp": "2026-04-18T17:41:35.147092",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step2.process_single_paragraph",
+      "timestamp": "2026-04-18T17:41:35.147403",
+      "duration_ms": null,
+      "data": {
+        "paragraph_index": 0,
+        "title": "概述"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.initial_search",
+      "timestamp": "2026-04-18T17:41:39.563057",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "query": "2026年命名实体识别NER技术发展趋势 最新研究进展 应用场景"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.initial_search.result",
+      "timestamp": "2026-04-18T17:41:45.511687",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "result_count": 3
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_query",
+      "timestamp": "2026-04-18T17:42:08.292389",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "iteration": 1,
+        "query": "2026年命名实体识别NER发展趋势 大语言模型LLM应用 行业场景挑战"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_result",
+      "timestamp": "2026-04-18T17:42:14.015438",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "iteration": 1,
+        "result_count": 3
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_query",
+      "timestamp": "2026-04-18T17:42:32.091190",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "iteration": 2,
+        "query": "2026年命名实体识别NER发展趋势 大语言模型LLM应用 行业融合 挑战瓶颈 未来预测"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_result",
+      "timestamp": "2026-04-18T17:42:38.039470",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "iteration": 2,
+        "result_count": 3
+      }
+    },
+    {
+      "event": "end",
+      "stage": "step2.process_single_paragraph",
+      "timestamp": "2026-04-18T17:43:05.373890",
+      "duration_ms": 90226,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step2.process_single_paragraph",
+      "timestamp": "2026-04-18T17:43:05.375210",
+      "duration_ms": null,
+      "data": {
+        "paragraph_index": 1,
+        "title": "详细分析"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.initial_search",
+      "timestamp": "2026-04-18T17:43:10.798437",
+      "duration_ms": null,
+      "data": {
+        "section": "详细分析",
+        "query": "2026年命名实体识别NER技术发展趋势 核心创新 应用场景 挑战瓶颈"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.initial_search.result",
+      "timestamp": "2026-04-18T17:43:27.795390",
+      "duration_ms": null,
+      "data": {
+        "section": "详细分析",
+        "result_count": 3
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_query",
+      "timestamp": "2026-04-18T17:44:15.107188",
+      "duration_ms": null,
+      "data": {
+        "section": "详细分析",
+        "iteration": 1,
+        "query": "2026年命名实体识别NER发展趋势 大语言模型LLM零样本少样本能力 多模态实体识别最新进展 领域自适应技术挑战 工业应用部署工具链"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_result",
+      "timestamp": "2026-04-18T17:44:31.372609",
+      "duration_ms": null,
+      "data": {
+        "section": "详细分析",
+        "iteration": 1,
+        "result_count": 3
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_query",
+      "timestamp": "2026-04-18T17:45:26.344608",
+      "duration_ms": null,
+      "data": {
+        "section": "详细分析",
+        "iteration": 2,
+        "query": "2026年命名实体识别NER发展趋势 大语言模型LLM应用 多模态实体识别最新进展 领域自适应技术挑战 工业应用案例"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_result",
+      "timestamp": "2026-04-18T17:45:32.233583",
+      "duration_ms": null,
+      "data": {
+        "section": "详细分析",
+        "iteration": 2,
+        "result_count": 3
+      }
+    },
+    {
+      "event": "end",
+      "stage": "step2.process_single_paragraph",
+      "timestamp": "2026-04-18T17:46:20.507986",
+      "duration_ms": 195132,
+      "data": {}
+    },
+    {
+      "event": "end",
+      "stage": "step2.process_paragraphs",
+      "timestamp": "2026-04-18T17:46:20.508466",
+      "duration_ms": 285361,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step3.generate_draft_report",
+      "timestamp": "2026-04-18T17:46:20.508542",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "end",
+      "stage": "step3.generate_draft_report",
+      "timestamp": "2026-04-18T17:47:16.472153",
+      "duration_ms": 55963,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step4.global_review",
+      "timestamp": "2026-04-18T17:47:16.472174",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "end",
+      "stage": "step4.global_review",
+      "timestamp": "2026-04-18T17:48:12.494101",
+      "duration_ms": 56021,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step5.save_report",
+      "timestamp": "2026-04-18T17:48:12.494131",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "end",
+      "stage": "step5.save_report",
+      "timestamp": "2026-04-18T17:48:12.516057",
+      "duration_ms": 21,
+      "data": {}
+    },
+    {
+      "event": "info",
+      "stage": "research.finish",
+      "timestamp": "2026-04-18T17:48:12.516778",
+      "duration_ms": null,
+      "data": {
+        "status": "success"
+      }
+    }
+  ]
+}

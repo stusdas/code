@@ -1,0 +1,74 @@
+{
+  "trace_id": "e28ac88b-489d-40fc-a98a-73de5866e361",
+  "started_at": "2026-04-19T14:20:40.528569",
+  "event_count": 7,
+  "metadata": {
+    "query": "",
+    "llm_provider": "deepseek",
+    "llm_model": {
+      "provider": "DeepSeek",
+      "model": "deepseek-chat",
+      "api_base": "https://api.deepseek.com"
+    }
+  },
+  "events": [
+    {
+      "event": "info",
+      "stage": "research.start",
+      "timestamp": "2026-04-19T14:20:40.530106",
+      "duration_ms": null,
+      "data": {
+        "query_length": 0
+      }
+    },
+    {
+      "event": "start",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-19T14:20:40.533482",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "warn",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-19T14:20:41.467031",
+      "duration_ms": null,
+      "data": {
+        "status": "fallback",
+        "reason": "Authentication Fails (governor)"
+      }
+    },
+    {
+      "event": "end",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-19T14:20:41.471896",
+      "duration_ms": 938,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-19T14:20:41.476197",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "error",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-19T14:20:41.781628",
+      "duration_ms": 305,
+      "data": {
+        "error": "Authentication Fails (governor)"
+      }
+    },
+    {
+      "event": "error",
+      "stage": "research.fail",
+      "timestamp": "2026-04-19T14:20:41.781653",
+      "duration_ms": null,
+      "data": {
+        "error": "Authentication Fails (governor)"
+      }
+    }
+  ]
+}

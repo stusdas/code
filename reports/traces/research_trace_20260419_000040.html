@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Research Trace Flow</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+      background: #f5f7fb;
+      color: #222;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e6eaf2;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .title { font-size: 20px; margin: 0 0 8px; }
+    .sub { color: #666; font-size: 13px; }
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .event {
+      border: 1px solid #e3e7ef;
+      border-left: 5px solid #8ca2ff;
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #fff;
+    }
+    .event.start { border-left-color: #3b82f6; }
+    .event.end { border-left-color: #16a34a; }
+    .event.error { border-left-color: #dc2626; }
+    .event.warn { border-left-color: #d97706; }
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .idx { font-weight: bold; width: 34px; color: #666; }
+    .stage { font-weight: 600; flex: 1; }
+    .etype {
+      font-size: 12px;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 2px 8px;
+      background: #f8fafc;
+    }
+    .meta {
+      margin-top: 6px;
+      display: flex;
+      gap: 14px;
+      color: #667085;
+      font-size: 12px;
+    }
+    .data {
+      margin-top: 8px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .key { color: #475569; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="title">Research Trace Flow</h1>
+    <div class="sub">generated_at: 2026-04-19T00:00:40.454088</div>
+    <div class="sub">trace_id: bdd36ff2-10df-4812-b541-0a393d01f689</div>
+    <div class="sub">started_at: 2026-04-18T23:59:47.593855</div>
+    <div class="sub">event_count: 11</div>
+    <div class='data' style='margin-top:10px'><span class='key'>query</span>: 2026NER发展趋势<br><span class='key'>llm_provider</span>: deepseek<br><span class='key'>llm_model</span>: {&#x27;provider&#x27;: &#x27;DeepSeek&#x27;, &#x27;model&#x27;: &#x27;deepseek-chat&#x27;, &#x27;api_base&#x27;: &#x27;https://api.deepseek.com&#x27;}</div>
+  </div>
+
+  <div class="card">
+    <h2 class="title" style="font-size:18px">Timeline</h2>
+    <div class="timeline">
+      
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#1</div>
+                <div class="stage">research.start</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T23:59:47.598278</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>query_length</span>: 11</div>
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#2</div>
+                <div class="stage">step0.make_research_plan</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T23:59:47.598701</span>
+                <span>duration: -</span>
+              </div>
+              
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#3</div>
+                <div class="stage">step0.make_research_plan</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-19T00:00:05.187551</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>status</span>: success<br><span class='key'>dimensions_count</span>: 4</div>
+            </div>
+            
+            <div class="event end">
+              <div class="row">
+                <div class="idx">#4</div>
+                <div class="stage">step0.make_research_plan</div>
+                <div class="etype">END</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-19T00:00:05.188006</span>
+                <span>duration: 17589 ms</span>
+              </div>
+              
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#5</div>
+                <div class="stage">step1.generate_report_structure</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-19T00:00:05.188032</span>
+                <span>duration: -</span>
+              </div>
+              
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#6</div>
+                <div class="stage">step1.generate_report_structure</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-19T00:00:22.016167</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>query_preview</span>: 2026NER发展趋势<br><span class='key'>used_dimensions</span>: 4<br><span class='key'>paragraph_count</span>: 2</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#7</div>
+                <div class="stage">step1.generate_report_structure</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-19T00:00:22.016881</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>paragraph_count</span>: 2</div>
+            </div>
+            
+            <div class="event end">
+              <div class="row">
+                <div class="idx">#8</div>
+                <div class="stage">step1.generate_report_structure</div>
+                <div class="etype">END</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-19T00:00:22.016923</span>
+                <span>duration: 16828 ms</span>
+              </div>
+              
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#9</div>
+                <div class="stage">step2.process_paragraphs</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-19T00:00:22.016986</span>
+                <span>duration: -</span>
+              </div>
+              
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#10</div>
+                <div class="stage">step2.process_single_paragraph</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-19T00:00:22.017376</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>paragraph_index</span>: 0<br><span class='key'>title</span>: 概述</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#11</div>
+                <div class="stage">step2.initial_search</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-19T00:00:29.137579</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 概述<br><span class='key'>query</span>: 2026年命名实体识别NER技术发展趋势 核心创新 行业应用 挑战瓶颈</div>
+            </div>
+            
+    </div>
+  </div>
+</body>
+</html>

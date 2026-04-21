@@ -1,0 +1,32 @@
+{
+  "trace_id": "8871eb7e-78cb-4826-8d16-92204f738c66",
+  "started_at": "2026-04-19T10:09:12.374470",
+  "event_count": 2,
+  "metadata": {
+    "query": "2026NER发展趋势",
+    "llm_provider": "deepseek",
+    "llm_model": {
+      "provider": "DeepSeek",
+      "model": "deepseek-chat",
+      "api_base": "https://api.deepseek.com"
+    }
+  },
+  "events": [
+    {
+      "event": "info",
+      "stage": "research.start",
+      "timestamp": "2026-04-19T10:09:12.376087",
+      "duration_ms": null,
+      "data": {
+        "query_length": 11
+      }
+    },
+    {
+      "event": "start",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-19T10:09:12.376391",
+      "duration_ms": null,
+      "data": {}
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "trace_id": "d4827a08-d8f6-4d69-a218-075c6ad49bf0",
+  "started_at": "2026-04-19T02:26:35.309192",
+  "event_count": 22,
+  "metadata": {
+    "query": "2026NER发展趋势",
+    "llm_provider": "deepseek",
+    "llm_model": {
+      "provider": "DeepSeek",
+      "model": "deepseek-chat",
+      "api_base": "https://api.deepseek.com"
+    }
+  },
+  "events": [
+    {
+      "event": "info",
+      "stage": "research.start",
+      "timestamp": "2026-04-19T02:26:35.310167",
+      "duration_ms": null,
+      "data": {
+        "query_length": 11
+      }
+    },
+    {
+      "event": "start",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-19T02:26:35.310446",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "info",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-19T02:26:49.355752",
+      "duration_ms": null,
+      "data": {
+        "status": "success",
+        "dimensions_count": 4
+      }
+    },
+    {
+      "event": "end",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-19T02:26:49.357472",
+      "duration_ms": 14047,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-19T02:26:49.357524",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "info",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-19T02:26:58.024369",
+      "duration_ms": null,
+      "data": {
+        "query_preview": "2026NER发展趋势",
+        "used_dimensions": 4,
+        "paragraph_count": 2
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-19T02:26:58.024607",
+      "duration_ms": null,
+      "data": {
+        "paragraph_count": 2
+      }
+    },
+    {
+      "event": "end",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-19T02:26:58.024626",
+      "duration_ms": 8667,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step2.process_paragraphs",
+      "timestamp": "2026-04-19T02:26:58.024652",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step2.process_single_paragraph",
+      "timestamp": "2026-04-19T02:26:58.024950",
+      "duration_ms": null,
+      "data": {
+        "paragraph_index": 0,
+        "title": "概述"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.initial_search",
+      "timestamp": "2026-04-19T02:27:02.828146",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "query": "2026年命名实体识别NER技术发展趋势 核心突破 应用场景 行业融合 挑战 未来预测"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "memory.search_miss",
+      "timestamp": "2026-04-19T02:27:19.832431",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "query": "2026年命名实体识别NER技术发展趋势 核心突破 应用场景 行业融合 挑战 未来预测",
+        "result_count": 3
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.initial_search.result",
+      "timestamp": "2026-04-19T02:27:19.834239",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "result_count": 3
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_query",
+      "timestamp": "2026-04-19T02:28:03.553594",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "iteration": 1,
+        "query": "2026年命名实体识别NER发展趋势 大语言模型LLM驱动范式转型 技术突破应用场景挑战"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_result",
+      "timestamp": "2026-04-19T02:28:20.800457",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "iteration": 1,
+        "result_count": 3
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_query",
+      "timestamp": "2026-04-19T02:29:03.871124",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "iteration": 2,
+        "query": "2026年命名实体识别NER发展趋势 大语言模型LLM驱动范式转型 技术演进时间线预测"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.reflection.search_result",
+      "timestamp": "2026-04-19T02:29:24.394487",
+      "duration_ms": null,
+      "data": {
+        "section": "概述",
+        "iteration": 2,
+        "result_count": 0
+      }
+    },
+    {
+      "event": "end",
+      "stage": "step2.process_single_paragraph",
+      "timestamp": "2026-04-19T02:29:50.767638",
+      "duration_ms": 172743,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step2.process_single_paragraph",
+      "timestamp": "2026-04-19T02:29:50.769485",
+      "duration_ms": null,
+      "data": {
+        "paragraph_index": 1,
+        "title": "详细分析"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.initial_search",
+      "timestamp": "2026-04-19T02:29:55.579034",
+      "duration_ms": null,
+      "data": {
+        "section": "详细分析",
+        "query": "2026年命名实体识别NER技术发展趋势 核心突破 应用场景 行业挑战"
+      }
+    },
+    {
+      "event": "info",
+      "stage": "memory.search_miss",
+      "timestamp": "2026-04-19T02:30:12.703550",
+      "duration_ms": null,
+      "data": {
+        "section": "详细分析",
+        "query": "2026年命名实体识别NER技术发展趋势 核心突破 应用场景 行业挑战",
+        "result_count": 3
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step2.initial_search.result",
+      "timestamp": "2026-04-19T02:30:12.704127",
+      "duration_ms": null,
+      "data": {
+        "section": "详细分析",
+        "result_count": 3
+      }
+    }
+  ]
+}

@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Research Trace Flow</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+      background: #f5f7fb;
+      color: #222;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e6eaf2;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .title { font-size: 20px; margin: 0 0 8px; }
+    .sub { color: #666; font-size: 13px; }
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .event {
+      border: 1px solid #e3e7ef;
+      border-left: 5px solid #8ca2ff;
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #fff;
+    }
+    .event.start { border-left-color: #3b82f6; }
+    .event.end { border-left-color: #16a34a; }
+    .event.error { border-left-color: #dc2626; }
+    .event.warn { border-left-color: #d97706; }
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .idx { font-weight: bold; width: 34px; color: #666; }
+    .stage { font-weight: 600; flex: 1; }
+    .etype {
+      font-size: 12px;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 2px 8px;
+      background: #f8fafc;
+    }
+    .meta {
+      margin-top: 6px;
+      display: flex;
+      gap: 14px;
+      color: #667085;
+      font-size: 12px;
+    }
+    .data {
+      margin-top: 8px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .key { color: #475569; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="title">Research Trace Flow</h1>
+    <div class="sub">generated_at: 2026-04-18T17:48:12.555530</div>
+    <div class="sub">trace_id: 5d8c1f07-9458-4410-adfa-2a7a4c75ab93</div>
+    <div class="sub">started_at: 2026-04-18T17:40:44.956328</div>
+    <div class="sub">event_count: 33</div>
+    <div class='data' style='margin-top:10px'><span class='key'>query</span>: 2026NER发展趋势<br><span class='key'>llm_provider</span>: deepseek<br><span class='key'>llm_model</span>: {&#x27;provider&#x27;: &#x27;DeepSeek&#x27;, &#x27;model&#x27;: &#x27;deepseek-chat&#x27;, &#x27;api_base&#x27;: &#x27;https://api.deepseek.com&#x27;}</div>
+  </div>
+
+  <div class="card">
+    <h2 class="title" style="font-size:18px">Timeline</h2>
+    <div class="timeline">
+      
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#1</div>
+                <div class="stage">research.start</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:40:44.957164</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>query_length</span>: 11</div>
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#2</div>
+                <div class="stage">step0.make_research_plan</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:40:44.957431</span>
+                <span>duration: -</span>
+              </div>
+              
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#3</div>
+                <div class="stage">step0.make_research_plan</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:41:19.442030</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>status</span>: success<br><span class='key'>dimensions_count</span>: 4</div>
+            </div>
+            
+            <div class="event end">
+              <div class="row">
+                <div class="idx">#4</div>
+                <div class="stage">step0.make_research_plan</div>
+                <div class="etype">END</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:41:19.451701</span>
+                <span>duration: 34494 ms</span>
+              </div>
+              
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#5</div>
+                <div class="stage">step1.generate_report_structure</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:41:19.451912</span>
+                <span>duration: -</span>
+              </div>
+              
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#6</div>
+                <div class="stage">step1.generate_report_structure</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:41:35.146615</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>query_preview</span>: 2026NER发展趋势<br><span class='key'>used_dimensions</span>: 4<br><span class='key'>paragraph_count</span>: 2</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#7</div>
+                <div class="stage">step1.generate_report_structure</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:41:35.146961</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>paragraph_count</span>: 2</div>
+            </div>
+            
+            <div class="event end">
+              <div class="row">
+                <div class="idx">#8</div>
+                <div class="stage">step1.generate_report_structure</div>
+                <div class="etype">END</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:41:35.146995</span>
+                <span>duration: 15695 ms</span>
+              </div>
+              
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#9</div>
+                <div class="stage">step2.process_paragraphs</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:41:35.147092</span>
+                <span>duration: -</span>
+              </div>
+              
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#10</div>
+                <div class="stage">step2.process_single_paragraph</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:41:35.147403</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>paragraph_index</span>: 0<br><span class='key'>title</span>: 概述</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#11</div>
+                <div class="stage">step2.initial_search</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:41:39.563057</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 概述<br><span class='key'>query</span>: 2026年命名实体识别NER技术发展趋势 最新研究进展 应用场景</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#12</div>
+                <div class="stage">step2.initial_search.result</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:41:45.511687</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 概述<br><span class='key'>result_count</span>: 3</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#13</div>
+                <div class="stage">step2.reflection.search_query</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:42:08.292389</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 概述<br><span class='key'>iteration</span>: 1<br><span class='key'>query</span>: 2026年命名实体识别NER发展趋势 大语言模型LLM应用 行业场景挑战</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#14</div>
+                <div class="stage">step2.reflection.search_result</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:42:14.015438</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 概述<br><span class='key'>iteration</span>: 1<br><span class='key'>result_count</span>: 3</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#15</div>
+                <div class="stage">step2.reflection.search_query</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:42:32.091190</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 概述<br><span class='key'>iteration</span>: 2<br><span class='key'>query</span>: 2026年命名实体识别NER发展趋势 大语言模型LLM应用 行业融合 挑战瓶颈 未来预测</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#16</div>
+                <div class="stage">step2.reflection.search_result</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:42:38.039470</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 概述<br><span class='key'>iteration</span>: 2<br><span class='key'>result_count</span>: 3</div>
+            </div>
+            
+            <div class="event end">
+              <div class="row">
+                <div class="idx">#17</div>
+                <div class="stage">step2.process_single_paragraph</div>
+                <div class="etype">END</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:43:05.373890</span>
+                <span>duration: 90226 ms</span>
+              </div>
+              
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#18</div>
+                <div class="stage">step2.process_single_paragraph</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:43:05.375210</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>paragraph_index</span>: 1<br><span class='key'>title</span>: 详细分析</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#19</div>
+                <div class="stage">step2.initial_search</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:43:10.798437</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 详细分析<br><span class='key'>query</span>: 2026年命名实体识别NER技术发展趋势 核心创新 应用场景 挑战瓶颈</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#20</div>
+                <div class="stage">step2.initial_search.result</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:43:27.795390</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 详细分析<br><span class='key'>result_count</span>: 3</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#21</div>
+                <div class="stage">step2.reflection.search_query</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:44:15.107188</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 详细分析<br><span class='key'>iteration</span>: 1<br><span class='key'>query</span>: 2026年命名实体识别NER发展趋势 大语言模型LLM零样本少样本能力 多模态实体识别最新进展 领域自适应技术挑战 工业应用部署工具链</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#22</div>
+                <div class="stage">step2.reflection.search_result</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:44:31.372609</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 详细分析<br><span class='key'>iteration</span>: 1<br><span class='key'>result_count</span>: 3</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#23</div>
+                <div class="stage">step2.reflection.search_query</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:45:26.344608</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 详细分析<br><span class='key'>iteration</span>: 2<br><span class='key'>query</span>: 2026年命名实体识别NER发展趋势 大语言模型LLM应用 多模态实体识别最新进展 领域自适应技术挑战 工业应用案例</div>
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#24</div>
+                <div class="stage">step2.reflection.search_result</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:45:32.233583</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>section</span>: 详细分析<br><span class='key'>iteration</span>: 2<br><span class='key'>result_count</span>: 3</div>
+            </div>
+            
+            <div class="event end">
+              <div class="row">
+                <div class="idx">#25</div>
+                <div class="stage">step2.process_single_paragraph</div>
+                <div class="etype">END</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:46:20.507986</span>
+                <span>duration: 195132 ms</span>
+              </div>
+              
+            </div>
+            
+            <div class="event end">
+              <div class="row">
+                <div class="idx">#26</div>
+                <div class="stage">step2.process_paragraphs</div>
+                <div class="etype">END</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:46:20.508466</span>
+                <span>duration: 285361 ms</span>
+              </div>
+              
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#27</div>
+                <div class="stage">step3.generate_draft_report</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:46:20.508542</span>
+                <span>duration: -</span>
+              </div>
+              
+            </div>
+            
+            <div class="event end">
+              <div class="row">
+                <div class="idx">#28</div>
+                <div class="stage">step3.generate_draft_report</div>
+                <div class="etype">END</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:47:16.472153</span>
+                <span>duration: 55963 ms</span>
+              </div>
+              
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#29</div>
+                <div class="stage">step4.global_review</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:47:16.472174</span>
+                <span>duration: -</span>
+              </div>
+              
+            </div>
+            
+            <div class="event end">
+              <div class="row">
+                <div class="idx">#30</div>
+                <div class="stage">step4.global_review</div>
+                <div class="etype">END</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:48:12.494101</span>
+                <span>duration: 56021 ms</span>
+              </div>
+              
+            </div>
+            
+            <div class="event start">
+              <div class="row">
+                <div class="idx">#31</div>
+                <div class="stage">step5.save_report</div>
+                <div class="etype">START</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:48:12.494131</span>
+                <span>duration: -</span>
+              </div>
+              
+            </div>
+            
+            <div class="event end">
+              <div class="row">
+                <div class="idx">#32</div>
+                <div class="stage">step5.save_report</div>
+                <div class="etype">END</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:48:12.516057</span>
+                <span>duration: 21 ms</span>
+              </div>
+              
+            </div>
+            
+            <div class="event info">
+              <div class="row">
+                <div class="idx">#33</div>
+                <div class="stage">research.finish</div>
+                <div class="etype">INFO</div>
+              </div>
+              <div class="meta">
+                <span>time: 2026-04-18T17:48:12.516778</span>
+                <span>duration: -</span>
+              </div>
+              <div class='data'><span class='key'>status</span>: success</div>
+            </div>
+            
+    </div>
+  </div>
+</body>
+</html>

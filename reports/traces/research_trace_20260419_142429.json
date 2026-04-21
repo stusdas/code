@@ -1,0 +1,100 @@
+{
+  "trace_id": "c631e527-b689-4789-b36b-fdb5652fe2d8",
+  "started_at": "2026-04-19T14:23:47.306503",
+  "event_count": 10,
+  "metadata": {
+    "query": "2025命名实体识别",
+    "llm_provider": "deepseek",
+    "llm_model": {
+      "provider": "DeepSeek",
+      "model": "deepseek-chat",
+      "api_base": "https://api.deepseek.com"
+    }
+  },
+  "events": [
+    {
+      "event": "info",
+      "stage": "research.start",
+      "timestamp": "2026-04-19T14:23:47.311124",
+      "duration_ms": null,
+      "data": {
+        "query_length": 10
+      }
+    },
+    {
+      "event": "start",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-19T14:23:47.315293",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "info",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-19T14:24:11.361392",
+      "duration_ms": null,
+      "data": {
+        "status": "success",
+        "dimensions_count": 3
+      }
+    },
+    {
+      "event": "end",
+      "stage": "step0.make_research_plan",
+      "timestamp": "2026-04-19T14:24:11.366863",
+      "duration_ms": 24051,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-19T14:24:11.370828",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "info",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-19T14:24:22.452418",
+      "duration_ms": null,
+      "data": {
+        "query_preview": "2025命名实体识别",
+        "used_dimensions": 3,
+        "paragraph_count": 2
+      }
+    },
+    {
+      "event": "info",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-19T14:24:22.460928",
+      "duration_ms": null,
+      "data": {
+        "paragraph_count": 2
+      }
+    },
+    {
+      "event": "end",
+      "stage": "step1.generate_report_structure",
+      "timestamp": "2026-04-19T14:24:22.460953",
+      "duration_ms": 11090,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step2.process_paragraphs",
+      "timestamp": "2026-04-19T14:24:22.467251",
+      "duration_ms": null,
+      "data": {}
+    },
+    {
+      "event": "start",
+      "stage": "step2.process_single_paragraph",
+      "timestamp": "2026-04-19T14:24:22.475564",
+      "duration_ms": null,
+      "data": {
+        "paragraph_index": 0,
+        "title": "概述"
+      }
+    }
+  ]
+}
