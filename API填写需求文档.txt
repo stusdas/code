@@ -1,0 +1,78 @@
+网页默认填写的 API Key 确实是在项目代码（数据文件）中定义的。
+
+具体的情况如下：
+
+1. 哪个文件存了具体的 API？
+具体的 API Key 存储在以下文件中：
+
+文件路径：data/settings/api_config.json
+内容示例：
+json
+{
+  "api_key": "sk-384896e1987e46e2ac0a75c4404c342f",
+  "base_url": "https://api.deepseek.com/v1",
+  "model": "deepseek-chat",
+  "mock_mode": false
+}
+你在网页上看到的默认值就是从这个 JSON 文件读取的。
+
+2. 为什么显示的是圆点（密码形式）？
+这是因为在前端代码中，API Key 的输入框被设置为“密码类型”。
+
+文件路径：app/frontend/index.html
+代码位置（第 138 行）：
+html
+<input type="password" id="apiKeyInput" placeholder="sk-...">
+由于 type="password"，浏览器会自动把内容隐藏为圆点以保护隐私。
+
+3. 数据是怎么传到网页上的？
+在 app/frontend/app.js 中有一段初始化逻辑（loadSettings 函数）：
+
+网页加载时，前端会通过 API 请求后端的配置。
+后端读取 data/settings/api_config.json 并返回。
+前端将读取到的 api_key 赋值给输入框，所以你一打开网页它就是填好的。
+额外提示： 如果你在网页的设置里修改并点击了“保存配置”，这个值还会被存入你浏览器的 LocalStorage（本地存储）中。下次打开时，前端会优先读取浏览器缓存的值。
+
+如果你想修改或者清空它，直接编辑 data/settings/api_config.json 或者在网页设置里修改保存即可。
+
+好的，我将这套“配置管理与持久化”的设计逻辑整理成了正式的项目需求说明。这套方案兼顾了开箱即用（后端默认值）、用户自定义（前端保存）以及隐私安全（密码显示）。
+
+您可以参考下面的需求文档：
+
+项目需求：模型配置持久化与安全管理系统
+1. 需求背景
+为了提升用户体验，系统需要支持 LLM 模型参数（如 API Key, Base URL, Model Name）的灵活配置。系统应提供一套“默认配置 + 个人覆盖”的机制，确保用户在不同设备上都能快速开始使用，同时保护敏感信息的隐私。
+
+2. 核心功能需求
+2.1 后端默认配置 (Server-Side Defaults)
+功能描述：系统应在服务端维护一份全局默认配置文件。
+实现要求：
+使用 data/settings/api_config.json 存储配置。
+应用启动时，若配置文件不存在，应根据预设模板自动初始化。
+支持存储 api_key、base_url、model 和 mock_mode 等字段。
+2.2 前后端配置同步 (Config Synchronization)
+功能描述：前端页面加载时，应自动从后端拉取当前生效的配置。
+实现要求：
+提供 /api/settings (GET) 接口供前端读取配置。
+提供 /api/settings (POST) 接口供前端更新服务端配置。
+2.3 双层持久化机制 (Dual-Layer Persistence)
+功能描述：结合“服务器存储”与“浏览器本地存储”，实现配置的灵活切换。
+逻辑优先级：
+优先读取浏览器 LocalStorage：如果用户在该设备上保存过自定义 Key，优先使用。
+备选读取服务端配置：若本地无数据，则使用服务端 api_config.json 提供的默认值。
+兜底默认值：若以上皆无，使用代码硬编码的默认 URL 和模型名（如 DeepSeek）。
+2.4 安全性与 UI 交互 (Security & UX)
+功能描述：在前端界面保护敏感信息，并提供友好的修改入口。
+实现要求：
+脱敏显示：API Key 输入框必须使用 type="password"，在界面上以圆点形式展示。
+即时生效：用户保存配置后，前端应立即更新 LocalStorage，并同步通过 POST 请求告知后端，无需重启应用。
+占位符引导：输入框应提供 sk-... 等格式的 Placeholder，引导用户正确输入。
+3. 技术实现参考
+后端存储：JSON 文件读写。
+前端存储：window.localStorage。
+通信协议：RESTful API (FastAPI)。
+UI 元素：HTML5 input[type="password"]。
+这种做法非常适合“私有化部署”或“工具类应用”，既能让用户拿到代码就能跑（因为有后端默认 Key），又给了用户极大的自由度去定制自己的 API 账户。
+
+
+
